@@ -9,12 +9,12 @@ final class PostService extends BasePostService {
   PostService() : super(SimpleNetworkService());
 
   @override
-  Future<Result<PostModel, MapperError<GeneralErrorModel>>> fetchPost() async {
-    final (response, error) = await networkService.send(NetworkURLs.post1);
+  Future<Result<PostModel, NetworkError<GeneralErrorModel>>> fetchPost() async {
+    final result = await networkService.send(NetworkURLs.post2);
+
     return GenericResponseMapperWithError.map<PostModel, PostModel,
         GeneralErrorModel>(
-      response,
-      error,
+      result,
       PostModel.fromJson,
       GeneralErrorModel.fromJson,
     );

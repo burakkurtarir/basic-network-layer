@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:network_layer_2/core/network/model/result.dart';
 import 'package:network_layer_2/core/network/service/base_network_service.dart';
 import 'package:network_layer_2/core/network/extension/dio_extensions.dart';
 import 'package:network_layer_2/core/network/model/network_error.dart';
@@ -14,11 +15,13 @@ final class SimpleNetworkService
   }
 
   @override
-  Future<(ResponseModel?, NetworkError?)> send(String url,
-      {RequestMethod method = RequestMethod.get,
-      Map<String, dynamic>? queryParameters,
-      Map<String, dynamic>? headers,
-      Object? data}) async {
+  Future<Result<ResponseModel, NetworkError>> send(
+    String url, {
+    RequestMethod method = RequestMethod.get,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    Object? data,
+  }) async {
     try {
       final response = await request(
         url,
@@ -29,15 +32,15 @@ final class SimpleNetworkService
 
       final responseModel = response.toResponseModel();
 
-      return (responseModel, null);
+      return Success(responseModel);
     } on DioException catch (e) {
       if (e.response != null) {
-        return (e.response.toResponseModel(), null);
+        return Success(e.response.toResponseModel());
       }
 
-      return (null, e.toNetworkError());
+      return Failure(e.toNetworkError());
     } catch (e) {
-      return (null, NetworkError.unknown());
+      return Failure(NetworkError.unknown());
     }
   }
 }

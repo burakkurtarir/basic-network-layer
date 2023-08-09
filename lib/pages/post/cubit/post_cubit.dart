@@ -25,15 +25,13 @@ final class PostCubit extends Cubit<PostState> {
             postModel: result.data, responseState: const SuccessState()));
         return;
       case Failure():
-        emit(state.copyWith(
-          responseState: ErrorState(error: result.error.networkError),
-          errorModel: result.error.errorModel,
-        ));
+        emit(
+          state.copyWith(
+            responseState: ErrorState(error: result.error),
+            errorModel: result.error.data,
+          ),
+        );
         return;
     }
-  }
-
-  (String? data, String? response, String? error) getData() {
-    return ("", null, null);
   }
 }
