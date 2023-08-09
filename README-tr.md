@@ -11,6 +11,7 @@ Result adında sealed bir class oluşturdum. Bu class'ı inherit eden 2 tane cla
 
 ## UI States
 Bir request attıktan sonra sayfada oluşabilecek değişiklikleri göstermek için ResponseState adında sealed bir class oluşturdum. Bu sayede request attıktan sonra meydana gelen değişiklikleri sayfada rahatlıkla gösterebiliriz.
+![Result class](images/ui-states.png)<br/>
 
 ## Network Models
 Network katmanını yaparken [dio](https://pub.dev/packages/dio) paketini kullandım ama bu pakete bağlı kalmamak için kendi response ve error modelimi oluşturdum.<br/>

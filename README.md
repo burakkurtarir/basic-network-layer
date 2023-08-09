@@ -11,6 +11,7 @@ I created a sealed class named Result. Success and Failure classes inherit from 
 
 ## UI States
 I created a sealed class called ResponseState to show the changes that may occur on the page after making a request. In this way, we can easily show the changes that occur after the request is made on the page.<br/>
+![Result class](images/ui-states.png)<br/>
 
 ## Network Models
 I used [dio package](https://pub.dev/packages/dio) but I didn't want to depend on it, so I created my own response and error models.<br/>
